@@ -87,7 +87,7 @@ php artisan migrate
 
 ### View mails
 
-To preview the mails sent by your application visit: <ins>/admin/mailviewer</ins>
+To preview the mails sent by your application visit: `/admin/mailviewer`
 
 You can change the route in the config file.
 
@@ -103,25 +103,37 @@ You can filter the listed mails in the overview with query parameters (the ?foo=
 - till=
 - around=
 
-The 'to', 'cc' and 'bcc' query parameters only accept 1 email address. For the 'notification' parameter you only need to paste the class basename (ie. \Illuminate\Auth\Notifications\VerifyEmail = VerifyEmail). The 'from' and 'till' parameters require a format that [Carbon](https://carbon.nesbot.com/docs) understands. The around parameter shows all records that are sent 10 minutes before and 10 minutes after the given time. You can customize the number of minutes with an additional 'd' (diff) parameter with the number of minutes.
+The 'to', 'cc' and 'bcc' query parameters only accept 1 email address.
+
+The 'notification' parameter only requires the class basename (ie. \Illuminate\Auth\Notifications\VerifyEmail = VerifyEmail).
+
+The 'from' and 'till' parameters require a format that [Carbon](https://carbon.nesbot.com/docs) understands.
+
+The 'around' parameter also uses the [Carbon](https://carbon.nesbot.com/docs) format and shows records that are sent 10 minutes before and 10 minutes after the given time. You can customize the number of minutes with an additional '&d=' parameter where the given number is the number of minutes.
 
 To view the mail sent you can click on the UUID link.
 
 #### Filter example #1
 
-View all \Illuminate\Auth\Notifications\VerifyEmail mails to elon@tesla.com sent yesterday:
+View all VerifyEmail notification mails to info@example.com sent yesterday:
 
-<ins>/admin/mailviewer?to=elon@tesla.com&notification=VerifyEmail&from=yesterday&till=yesterday</ins>
+`/admin/mailviewer?to=info@example.com&notification=VerifyEmail&from=yesterday&till=yesterday`
 
 #### Filter example #2
 
 View all mails sent in the last 2 hours:
 
-<ins>/admin/mailviewer?from=2 hours ago</ins>
+`/admin/mailviewer?from=2 hours ago`
+
+#### Filter example #3
+
+View all mails sent this morning around ~08:00:
+
+`/admin/mailviewer?around=2020-12-31 08:00&d=60`
 
 ### Analytics
 
-To preview the analytics page visit: <ins>/admin/mailviewer/analytics</ins>
+To preview the analytics page visit: `/admin/mailviewer/analytics`
 
 You can change the route in the config file.
 
