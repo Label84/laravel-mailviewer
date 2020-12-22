@@ -1,0 +1,22 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+
+    paths:
+        - src
+        - database
+        - routes
+        - config
+
+    # The level 8 is the highest level
+    level: 8
+
+    ignoreErrors:
+        -
+            message: '#Parameter [a-zA-Z0-9\\_]+ $time of static method Carbon\Carbon::parse() expects DateTimeInterface|string|null, array|string|null given.#'
+            path: src/Http/Controllers/MailViewerController.php
+
+    excludes_analyse:
+
+    checkMissingIterableValueType: false
