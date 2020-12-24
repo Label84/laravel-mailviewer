@@ -1,6 +1,6 @@
 <?php
 
-namespace Label84\MailViewer\Tests\Unit\Events\Notifications;
+namespace Label84\MailViewer\Tests\Events\Notifications;
 
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;

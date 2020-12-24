@@ -1,6 +1,6 @@
 <?php
 
-namespace Label84\MailViewer\Tests\Unit\Views;
+namespace Label84\MailViewer\Tests\Views;
 
 use Carbon\Carbon;
 use Label84\MailViewer\Models\MailViewerItem;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Label84\MailViewer\Tests\Unit\Commands;
+namespace Label84\MailViewer\Tests\Commands;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;

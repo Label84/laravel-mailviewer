@@ -1,11 +1,11 @@
 <?php
 
-namespace Label84\MailViewer\Tests\Unit\Config;
+namespace Label84\MailViewer\Tests\Config;
 
 use Illuminate\Support\Facades\Notification;
 use Label84\MailViewer\Models\MailViewerItem;
+use Label84\MailViewer\Tests\Events\Notifications\TestNotification;
 use Label84\MailViewer\Tests\TestCase;
-use Label84\MailViewer\Tests\Unit\Events\Notifications\TestNotification;
 
 class ConfigTest extends TestCase
 {

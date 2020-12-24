@@ -1,6 +1,6 @@
 <?php
 
-namespace Label84\MailViewer\Tests\Unit\Models;
+namespace Label84\MailViewer\Tests\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Schema;
