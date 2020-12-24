@@ -1,9 +1,10 @@
 # Laravel MailViewer
 
-[![Latest Stable Version](https://poser.pugx.org/label84/laravel-mailviewer/v/stable?format=flat-square)](https://packagist.org/packages/label84/laravel-mailviewer)
+[![Latest Stable Version](https://poser.pugx.org/label84/laravel-mailviewer/v/stable?style=flat-square)](https://packagist.org/packages/label84/laravel-mailviewer)
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![Quality Score](https://img.shields.io/scrutinizer/g/label84/laravel-mailviewer.svg?style=flat-square)](https://scrutinizer-ci.com/g/label84/laravel-mailviewer)
 [![Total Downloads](https://img.shields.io/packagist/dt/label84/laravel-mailviewer.svg?style=flat-square)](https://packagist.org/packages/label84/laravel-mailviewer)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/label84/laravel-mailviewer/run-php-tests?label=Tests&style=flat-square)
 
 Laravel MailViewer enables you to view and filter through mail sent by your Laravel application. It saves all sent mail to the database automatically. It also provides an overview of the number of emails sent grouped by Notification.
 
