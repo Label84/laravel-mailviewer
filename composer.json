@@ -37,7 +37,7 @@
     "require-dev": {
         "orchestra/testbench": "^6.0",
         "nunomaduro/larastan": "^0.6.11",
-        "phpunit/phpunit": "^9.4"
+        "phpunit/phpunit": "^9.5"
     },
     "minimum-stability": "dev",
     "prefer-stable": true

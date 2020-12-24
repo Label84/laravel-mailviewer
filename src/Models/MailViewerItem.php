@@ -3,6 +3,7 @@
 namespace Label84\MailViewer\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -15,6 +16,8 @@ use Label84\MailViewer\Database\Factories\MailViewerItemFactory;
  */
 class MailViewerItem extends Model
 {
+    use HasFactory;
+
     public static function booted(): void
     {
         static::creating(function (self $mailViewerItem) {
