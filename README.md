@@ -5,8 +5,9 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/label84/laravel-mailviewer.svg?style=flat-square)](https://scrutinizer-ci.com/g/label84/laravel-mailviewer)
 [![Total Downloads](https://img.shields.io/packagist/dt/label84/laravel-mailviewer.svg?style=flat-square)](https://packagist.org/packages/label84/laravel-mailviewer)
 
-
 Laravel MailViewer enables you to view and filter through mail sent by your Laravel application. It saves all sent mail to the database automatically. It also provides an overview of the number of emails sent grouped by Notification.
+
+![MailViewer screenshot](./docs/screenshot_default.png?raw=true "MailViewer Screenshot")
 
 - [Requirements](#requirements)
 - [Limitations](#limitations)
@@ -30,9 +31,8 @@ Laravel MailViewer enables you to view and filter through mail sent by your Lara
 ## Laravel support
 
 | Version       | Release       |
-|:-------------:|:-------------:|
-| 7.x to 8.x    | 1.1           |
-
+|:--------------|:-------------:|
+| 7.x to 8.x    | 1.0           |
 
 ## Limitations
 
@@ -91,27 +91,25 @@ To preview the mails sent by your application visit: `/admin/mailviewer`
 
 You can change the route in the config file.
 
+To view the content of the mail you can click on the UUID (blue link).
+
 #### Filter through the items
 
 You can filter the listed mails in the overview with query parameters (the ?foo=bar ones).
 
-- to=
-- cc=
-- bcc=
-- notification=
-- from=
-- till=
-- around=
-
-The 'to', 'cc' and 'bcc' query parameters only accept 1 email address.
+| Parameter     | Value                                    | Example           |
+|:--------------|:-----------------------------------------|:------------------|
+| to=           | email                                    | info@example.com  |
+| cc=           | email                                    | info@example.com  |
+| bcc=          | email                                    | info@example.com  |
+| notification= | Basename Notification class              | VerifyEmail       |
+| from=         | [Carbon](https://carbon.nesbot.com/docs) | 2 hours ago       |
+| till=         | [Carbon](https://carbon.nesbot.com/docs) | yesterday         |
+| around=       | [Carbon](https://carbon.nesbot.com/docs) | 2020-12-24 06:00  |
 
 The 'notification' parameter only requires the class basename (ie. \Illuminate\Auth\Notifications\VerifyEmail = VerifyEmail).
 
-The 'from' and 'till' parameters require a format that [Carbon](https://carbon.nesbot.com/docs) understands.
-
-The 'around' parameter also uses the [Carbon](https://carbon.nesbot.com/docs) format and shows records that are sent 10 minutes before and 10 minutes after the given time. You can customize the number of minutes with an additional '&d=' parameter where the given number is the number of minutes.
-
-To view the mail sent you can click on the UUID link.
+The around parameter show all mails sent around the given time. By default is will show all mails sent 10 minutes before and 10 minutes after the given time. You can customize the number of minutes by adding an additional &d=X parameter where X is the number of minutes.
 
 #### Filter example #1
 
@@ -132,6 +130,8 @@ View all mails sent this morning around ~08:00:
 `/admin/mailviewer?around=2020-12-31 08:00&d=60`
 
 ### Analytics
+
+![MailViewer Analytics screenshot](./docs/screenshot_analytics.png?raw=true "MailViewer Analytics Screenshot")
 
 To preview the analytics page visit: `/admin/mailviewer/analytics`
 
