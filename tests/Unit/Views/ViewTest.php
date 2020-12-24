@@ -59,7 +59,9 @@ class ViewTest extends TestCase
 
         $response->assertSuccessful();
 
-        $response->assertViewHas('mails', MailViewerItem::where('notification', '\Illuminate\Auth\Notifications\VerifyEmail')->paginate(50));
+        $response->assertViewHas('mails', MailViewerItem::where('notification', '\Illuminate\Auth\Notifications\VerifyEmail')
+            ->paginate(50)
+            ->appends(['notification' => $class]));
     }
 
     /** @test */
@@ -79,7 +81,9 @@ class ViewTest extends TestCase
 
         $response->assertSuccessful();
 
-        $response->assertViewHas('mails', MailViewerItem::whereDate('sent_at', '>=', $fromDate)->paginate(50));
+        $response->assertViewHas('mails', MailViewerItem::whereDate('sent_at', '>=', $fromDate)
+            ->paginate(50)
+            ->appends(['from' => $fromDate]));
     }
 
     /** @test */
@@ -99,7 +103,9 @@ class ViewTest extends TestCase
 
         $response->assertSuccessful();
 
-        $response->assertViewHas('mails', MailViewerItem::whereDate('sent_at', '<=', $tillDate)->paginate(50));
+        $response->assertViewHas('mails', MailViewerItem::whereDate('sent_at', '<=', $tillDate)
+            ->paginate(50)
+            ->appends(['till' => $tillDate]));
     }
 
     /** @test */
@@ -122,7 +128,9 @@ class ViewTest extends TestCase
         $response->assertViewHas('mails', MailViewerItem::whereBetween('sent_at', [
                 Carbon::createFromFormat('Y-m-d H:i', $aroundTime)->subMinutes(10),
                 Carbon::createFromFormat('Y-m-d H:i', $aroundTime)->addMinutes(10),
-            ])->paginate(50));
+            ])
+            ->paginate(50)
+            ->appends(['around' => $aroundTime]));
     }
 
     /** @test */
@@ -148,7 +156,9 @@ class ViewTest extends TestCase
         $response->assertViewHas('mails', MailViewerItem::whereBetween('sent_at', [
                 Carbon::createFromFormat('Y-m-d H:i', $aroundTime)->subMinutes(5),
                 Carbon::createFromFormat('Y-m-d H:i', $aroundTime)->addMinutes(5),
-            ])->paginate(50));
+            ])
+            ->paginate(50)
+            ->appends(['around' => $aroundTime, 'd' => 5]));
     }
 
     /** @test */
