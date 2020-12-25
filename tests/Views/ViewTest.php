@@ -38,7 +38,7 @@ class ViewTest extends TestCase
     /** @test */
     public function it_can_list_the_mail_viewer_items_with_to_cc_bcc_query_filter()
     {
-        MailViewerItem::newFactory()->create([
+        factory(MailViewerItem::class)->create([
             'recipients' => ['to' => ['test@example.com'], 'cc' => [], 'bcc' => []],
         ]);
 
@@ -68,7 +68,7 @@ class ViewTest extends TestCase
     public function it_can_list_the_mail_viewer_items_with_from_query_filter()
     {
         collect(range(1, 50))->each(function (int $i) {
-            MailViewerItem::newFactory()->create([
+            factory(MailViewerItem::class)->create([
                 'sent_at' => today()->subDays($i)->startOfDay(),
             ]);
         });
@@ -90,7 +90,7 @@ class ViewTest extends TestCase
     public function it_can_list_the_mail_viewer_items_with_till_query_filter()
     {
         collect(range(1, 50))->each(function (int $i) {
-            MailViewerItem::newFactory()->create([
+            factory(MailViewerItem::class)->create([
                 'sent_at' => today()->subDays($i)->startOfDay(),
             ]);
         });
@@ -112,7 +112,7 @@ class ViewTest extends TestCase
     public function it_can_list_the_mail_viewer_items_with_around_query_filter()
     {
         collect(range(1, 50))->each(function (int $i) {
-            MailViewerItem::newFactory()->create([
+            factory(MailViewerItem::class)->create([
                 'sent_at' => now()->subMinutes($i),
             ]);
         });
@@ -137,7 +137,7 @@ class ViewTest extends TestCase
     public function it_can_list_the_mail_viewer_items_with_around_and_d_query_filter()
     {
         collect(range(1, 50))->each(function (int $i) {
-            MailViewerItem::newFactory()->create([
+            factory(MailViewerItem::class)->create([
                 'sent_at' => now()->subMinutes($i),
             ]);
         });
@@ -164,7 +164,7 @@ class ViewTest extends TestCase
     /** @test */
     public function it_has_pagination_when_item_count_is_more_than_item_per_page()
     {
-        MailViewerItem::newFactory()->count(60)->create();
+        factory(MailViewerItem::class, 60)->create();
 
         $response = $this->withoutMiddleware()->get(route('mailviewer.index'));
 
@@ -178,7 +178,7 @@ class ViewTest extends TestCase
     /** @test */
     public function it_can_show_the_mail_viewer_item_preview()
     {
-        MailViewerItem::newFactory()->create();
+        factory(MailViewerItem::class)->create();
 
         $response = $this->withoutMiddleware()->get(route('mailviewer.show', MailViewerItem::first()));
 
@@ -188,7 +188,7 @@ class ViewTest extends TestCase
     /** @test */
     public function it_can_show_the_mail_viewer_analytics()
     {
-        MailViewerItem::newFactory()->count(20)->create();
+        factory(MailViewerItem::class, 20)->create();
 
         $response = $this->withoutMiddleware()->get(route('mailviewer.analytics'));
 

@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Label84\MailViewer\Database\Factories\MailViewerItemFactory;
 
 /**
  * @property string $uuid
@@ -29,11 +28,6 @@ class MailViewerItem extends Model
     public function getRouteKeyName(): string
     {
         return 'uuid';
-    }
-
-    protected static function newFactory(): MailViewerItemFactory
-    {
-        return MailViewerItemFactory::new();
     }
 
     public $incrementing = false;
