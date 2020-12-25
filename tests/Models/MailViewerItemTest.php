@@ -35,7 +35,7 @@ class MailViewerItemTest extends TestCase
     /** @test */
     public function it_will_set_an_uuid_when_created()
     {
-        $item = MailViewerItem::newFactory()->create();
+        $item = factory(MailViewerItem::class)->create();
 
         $this->assertTrue(preg_match(LazyUuidFromString::VALID_REGEX, $item->uuid) === 1);
     }
