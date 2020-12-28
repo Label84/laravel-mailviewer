@@ -44,7 +44,7 @@
                                 <th scope="row">
                                     <a href="{{ route('mailviewer.show', $mail) }}"
                                         target="{{ config('mailviewer.view.use_tabs') ? '_blank' : '_self' }}">
-                                        {{ $mail->uuid }}
+                                        {{ Str::before($mail->uuid, '-') }}
                                     </a>
                                 </th>
                                 <td>
@@ -62,7 +62,13 @@
                                     <span class="align-baseline small text-muted">cc:</span> {{ $recipient }}<br>
                                     @endforeach
                                 </td>
-                                <td>{{ $mail->sent_at }}</td>
+                                <td>
+                                    <span class="text-nowrap">
+                                        <abbr title="{{ $mail->sent_at->toDateTimeString() }}">
+                                            {{ $mail->sent_at->diffForHumans() }}
+                                        </abbr>
+                                    </span>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -48,7 +48,11 @@
                                     {{ $item->total }}
                                 </td>
                                 <td>
-                                    {{ $item->last_sent_at }}
+                                    <span class="text-nowrap">
+                                        <abbr title="{{ $item->last_sent_at }}">
+                                            {{ Carbon\Carbon::parse($item->last_sent_at)->diffForHumans() }}
+                                        </abbr>
+                                    </span>
                                 </td>
                             </tr>
                             @endforeach
