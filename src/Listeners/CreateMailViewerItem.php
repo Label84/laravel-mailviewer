@@ -59,7 +59,7 @@ class CreateMailViewerItem
         }
 
         /* Check exclude notification list */
-        if (in_array($event->data['__laravel_notification'], config('mailviewer.database.exclude.notification') ?? [])) {
+        if (isset($event->data['__laravel_notification']) && in_array($event->data['__laravel_notification'], config('mailviewer.database.exclude.notification') ?? [])) {
             return false;
         }
 
