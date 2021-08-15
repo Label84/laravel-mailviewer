@@ -3,9 +3,11 @@
 namespace Label84\MailViewer\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Label84\MailViewer\Tests\Database\Factories\MailViewerItemFactory;
 
 /**
  * @property string $uuid
@@ -14,6 +16,8 @@ use Illuminate\Support\Str;
  */
 class MailViewerItem extends Model
 {
+    use HasFactory;
+
     public static function booted(): void
     {
         static::creating(function (self $mailViewerItem) {
@@ -23,6 +27,11 @@ class MailViewerItem extends Model
         static::addGlobalScope('order', function (Builder $builder) {
             $builder->orderBy('sent_at', 'desc');
         });
+    }
+
+    protected static function newFactory(): MailViewerItemFactory
+    {
+        return MailViewerItemFactory::new();
     }
 
     public function getRouteKeyName(): string

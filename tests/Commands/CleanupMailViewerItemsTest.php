@@ -23,7 +23,7 @@ class CleanupMailViewerItemsTest extends TestCase
     public function it_deletes_items_older_than_30_days_by_default()
     {
         collect(range(1, 60))->each(function (int $i) {
-            factory(MailViewerItem::class)->create([
+            MailViewerItem::factory()->create([
                 'sent_at' => today()->subDays($i)->startOfDay(),
             ]);
         });
@@ -39,7 +39,7 @@ class CleanupMailViewerItemsTest extends TestCase
     public function it_deletes_correct_number_of_items_with_10_days_option()
     {
         collect(range(1, 60))->each(function (int $i) {
-            factory(MailViewerItem::class)->create([
+            MailViewerItem::factory()->create([
                 'sent_at' => today()->subDays($i)->startOfDay(),
             ]);
         });
@@ -55,7 +55,7 @@ class CleanupMailViewerItemsTest extends TestCase
     public function it_deletes_only_items_older_than_the_given_number_days()
     {
         collect(range(1, 60))->each(function (int $i) {
-            factory(MailViewerItem::class)->create([
+            MailViewerItem::factory()->create([
                 'sent_at' => today()->subDays($i)->startOfDay(),
             ]);
         });
