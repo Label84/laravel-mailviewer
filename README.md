@@ -6,7 +6,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/label84/laravel-mailviewer.svg?style=flat-square)](https://packagist.org/packages/label84/laravel-mailviewer)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/label84/laravel-mailviewer/run-tests?label=Tests&style=flat-square)
 
-Laravel MailViewer enables you to view and filter through mail sent by your Laravel application. It saves all sent mail to the database automatically. It also provides an overview of the number of emails sent grouped by Notification.
+Laravel MailViewer enables you to view and filter mail that is sent by your Laravel application. It saves all sent mail to the database automatically. It also includes an overview page with the total number of mails sent grouped by Notification.
 
 ![MailViewer screenshot](./docs/screenshot_default.png?raw=true "MailViewer Screenshot")
 
@@ -14,11 +14,10 @@ Laravel MailViewer enables you to view and filter through mail sent by your Lara
 - [Limitations](#limitations)
 - [Installation](#installation)
 - [Usage](#usage)
-  - [View mails](#view-mails)
-  - [Analytics](#analytics)
-- [Configuration](#configuration)
-  - [Commands](#commands)
-  - [Exclude records](#exclude-records)
+- [Analytics](#analytics)
+- [Examples](#examples)
+- [Commands](#commands)
+- [Exclude records](#exclude-records)
 - [Notes](#Notes)
 - [Tests](#tests)
 - [Security](#security)
@@ -27,14 +26,14 @@ Laravel MailViewer enables you to view and filter through mail sent by your Lara
 ## Requirements
 
 - Laravel 7.x or 8.x
-- PHP >= 7.4 or 8.0
+- PHP >=7.4 or 8.0
 
 ## Laravel support
 
-| Version       | Release       |
-|:--------------|:-------------:|
-| 8.x           | ^2.0          |
-| 7.x           | ^1.0          |
+| Version | Release |
+|---------|---------|
+| 8.x     | ^2.0    |
+| 7.x     | ^1.0    |
 
 ## Limitations
 
@@ -50,11 +49,11 @@ Add the package to your application:
 composer require label84/laravel-mailviewer
 ```
 
-You can also do this manually by updating your composer.json file.
+You can also manually update your composer.json.
 
 ### 2. Install package
 
-Add the config and migration to your application:
+Add the config and migration to your application.
 
 ```sh
 php artisan mailviewer:install
@@ -62,7 +61,7 @@ php artisan mailviewer:install
 
 #### 2.1 Install package manually (alternative)
 
-You can also install the package manually by executing the following commands:
+You can also install the package manually by executing the following two commands.
 
 ```sh
 php artisan vendor:publish Label84\MailViewer\MailViewerServiceProvider --config
@@ -71,7 +70,7 @@ php artisan vendor:publish Label84\MailViewer\MailViewerServiceProvider --migrat
 
 #### 2.2 Publish the views (optional)
 
-To change the default views, you can publish them to your application with the following command:
+To change the default views, you can publish them to your application.
 
 ```sh
 php artisan vendor:publish Label84\MailViewer\MailViewerServiceProvider --views
@@ -79,7 +78,7 @@ php artisan vendor:publish Label84\MailViewer\MailViewerServiceProvider --views
 
 ### 3. Run migrations
 
-Run the migration command:
+Run the migration command.
 
 ```sh
 php artisan migrate
@@ -87,17 +86,15 @@ php artisan migrate
 
 ## Usage
 
-### View mails
+To preview the mails sent by your application visit: ``/admin/mailviewer``
 
-To preview the mails sent by your application visit: `/admin/mailviewer`
-
-You can change the route in the config file.
+You can change the url in the config file.
 
 To view the content of the mail you can click on the UUID (blue link).
 
-#### Filter through the items
+### 1. Query filters
 
-You can filter the listed mails in the overview with query parameters (the ?foo=bar ones).
+You can filter the mails in the overview with query parameters - example ``/admin/mailviewer?notification=WelcomeMail``.
 
 | Parameter     | Value                                    | Example           |
 |:--------------|:-----------------------------------------|:------------------|
@@ -113,74 +110,55 @@ The 'notification' parameter only requires the class basename (ie. \Illuminate\A
 
 The around parameter show all mails sent around the given time. By default is will show all mails sent 10 minutes before and 10 minutes after the given time. You can customize the number of minutes by adding an additional &d=X parameter where X is the number of minutes.
 
-#### Filter example #1
-
-View all VerifyEmail notification mails to info@example.com sent yesterday:
-
-`/admin/mailviewer?to=info@example.com&notification=VerifyEmail&from=yesterday&till=yesterday`
-
-#### Filter example #2
-
-View all mails sent in the last 2 hours:
-
-`/admin/mailviewer?from=2 hours ago`
-
-#### Filter example #3
-
-View all mails sent this morning around ~08:00:
-
-`/admin/mailviewer?around=2020-12-31 08:00&d=60`
-
-### Analytics
+## Analytics
 
 ![MailViewer Analytics screenshot](./docs/screenshot_analytics.png?raw=true "MailViewer Analytics Screenshot")
 
-To preview the analytics page visit: `/admin/mailviewer/analytics`
+To preview the analytics page visit: ``/admin/mailviewer/analytics``
 
 You can change the route in the config file.
 
-## Configuration
+## Examples
 
-Publish the config file and views file to be able to customize the MailViewer package.
+### Example #1
 
-### Commands
+View all VerifyEmail mails to info@example.com.
 
-#### Clean up database records
+``/admin/mailviewer?to=info@example.com&notification=VerifyEmail``
+
+### Example #2
+
+View all mails sent in the last 2 hours.
+
+``/admin/mailviewer?from=2 hours ago``
+
+## Commands
 
 The package has has a built-in command to clean up older database records. Add this command to your Kernel and run it daily/weekly.
 
 ```sh
-php artisan mailviewer:cleanup
+php artisan mailviewer:cleanup --days=30
 ```
 
-By default the command will remove all records older than 30 days.
+## Exclude records
 
-##### Delete records that are older than x days
-
-```sh
-php artisan mailviewer:cleanup --days=60
-```
-
-### Exclude records
-
-#### Exclude mail by notification of recipient
-
-In the config file you can add an array of notification classes and/or array of email addresses that should be excluded.
+In the config file you can add an array of notification classes and an array of email addresses that should be excluded. Those notifications and email addresses won't be saved to the database.
 
 ## Notes
 
-- Bootstrap 5 is used for the default interface
-- Middleware [web] + [auth] are applied by default
+- Bootstrap 5 is used by default
+- Middleware 'web' and 'auth' are applied by default
 
 ## Tests
 
 ```sh
+./vendor/bin/phpstan analyze
 ./vendor/bin/phpunit
 ```
 
 ## Security
 
-By default the package only applies the [web] and [auth] middleware to the MailViewer routes. When used in production make sure you apply extra middleware or other security measure to prevent unwanted usage.
+By default the package only applies the 'web and 'auth' middleware to the routes. When used in production make sure you apply additional middleware or other security measures to restrict access.
 
 ## License
 
