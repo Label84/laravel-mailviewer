@@ -11,14 +11,14 @@ Laravel MailViewer enables you to view and filter mail that is sent by your Lara
 ![MailViewer screenshot](./docs/screenshot_default.png?raw=true "MailViewer Screenshot")
 
 - [Requirements](#requirements)
-- [Limitations](#limitations)
+- [Laravel support](#laravel-support)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Analytics](#analytics)
-- [Examples](#examples)
-- [Commands](#commands)
-- [Exclude records](#exclude-records)
-- [Notes](#Notes)
+  - [Query filters](#query-filters)
+  - [Analytics](#analytics)
+  - [Examples](#examples)
+  - [Commands](#commands)
+  - [Exclude records](#exclude-records)
 - [Tests](#tests)
 - [Security](#security)
 - [License](#license)
@@ -92,7 +92,7 @@ You can change the url in the config file.
 
 To view the content of the mail you can click on the UUID (blue link).
 
-### 1. Query filters
+### Query filters
 
 You can filter the mails in the overview with query parameters - example ``/admin/mailviewer?notification=WelcomeMail``.
 
@@ -110,7 +110,7 @@ The 'notification' parameter only requires the class basename (ie. \Illuminate\A
 
 The around parameter show all mails sent around the given time. By default is will show all mails sent 10 minutes before and 10 minutes after the given time. You can customize the number of minutes by adding an additional &d=X parameter where X is the number of minutes.
 
-## Analytics
+### Analytics
 
 ![MailViewer Analytics screenshot](./docs/screenshot_analytics.png?raw=true "MailViewer Analytics Screenshot")
 
@@ -118,21 +118,21 @@ To preview the analytics page visit: ``/admin/mailviewer/analytics``
 
 You can change the route in the config file.
 
-## Examples
+### Examples
 
-### Example #1
+#### Example #1
 
 View all VerifyEmail mails to info@example.com.
 
 ``/admin/mailviewer?to=info@example.com&notification=VerifyEmail``
 
-### Example #2
+#### Example #2
 
 View all mails sent in the last 2 hours.
 
 ``/admin/mailviewer?from=2 hours ago``
 
-## Commands
+### Commands
 
 The package has has a built-in command to clean up older database records. Add this command to your Kernel and run it daily/weekly.
 
@@ -140,14 +140,9 @@ The package has has a built-in command to clean up older database records. Add t
 php artisan mailviewer:cleanup --days=30
 ```
 
-## Exclude records
+### Exclude records
 
 In the config file you can add an array of notification classes and an array of email addresses that should be excluded. Those notifications and email addresses won't be saved to the database.
-
-## Notes
-
-- Bootstrap 5 is used by default
-- Middleware 'web' and 'auth' are applied by default
 
 ## Tests
 
