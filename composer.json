@@ -16,6 +16,18 @@
         "illuminate/support": "^8.0",
         "illuminate/database": "^8.0"
     },    
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "nunomaduro/larastan": "^1.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Label84\\MailViewer\\MailViewerServiceProvider"
+            ]
+        }
+    },
     "autoload": {
         "psr-4": {
             "Label84\\MailViewer\\": "src"
@@ -25,18 +37,10 @@
         "psr-4": {
             "Label84\\MailViewer\\Tests\\": "tests"
         }
-    },    
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Label84\\MailViewer\\MailViewerServiceProvider"
-            ]
-        }
     },
-    "require-dev": {
-        "orchestra/testbench": "^6.0",
-        "nunomaduro/larastan": "^0.7.12",
-        "phpunit/phpunit": "^9.5"
+    "scripts": {
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/phpunit"
     },
     "minimum-stability": "dev",
     "prefer-stable": true

@@ -147,8 +147,8 @@ In the config file you can add an array of notification classes and an array of 
 ## Tests
 
 ```sh
-./vendor/bin/phpstan analyze
-./vendor/bin/phpunit
+composer analyse
+composer test
 ```
 
 ## Security
