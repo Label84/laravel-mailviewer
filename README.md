@@ -26,7 +26,7 @@ Laravel MailViewer enables you to view and filter mail that is sent by your Lara
 ## Requirements
 
 - Laravel 7.x or 8.x
-- PHP >=7.4 or 8.0
+- PHP >=7.4 or 8.x
 
 ## Laravel support
 
