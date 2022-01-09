@@ -64,8 +64,8 @@ php artisan mailviewer:install
 You can also install the package manually by executing the following two commands.
 
 ```sh
-php artisan vendor:publish Label84\MailViewer\MailViewerServiceProvider --config
-php artisan vendor:publish Label84\MailViewer\MailViewerServiceProvider --migrations
+php artisan vendor:publish --provider="Label84\MailViewer\MailViewerServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Label84\MailViewer\MailViewerServiceProvider" --tag="migrations"
 ```
 
 #### 2.2 Publish the views (optional)
@@ -73,7 +73,7 @@ php artisan vendor:publish Label84\MailViewer\MailViewerServiceProvider --migrat
 To change the default views, you can publish them to your application.
 
 ```sh
-php artisan vendor:publish Label84\MailViewer\MailViewerServiceProvider --views
+php artisan vendor:publish --provider="Label84\MailViewer\MailViewerServiceProvider" --tag="views"
 ```
 
 ### 3. Run migrations
