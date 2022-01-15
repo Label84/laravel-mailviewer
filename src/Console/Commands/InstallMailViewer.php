@@ -18,12 +18,12 @@ class InstallMailViewer extends Command
 
         $this->call('vendor:publish', [
             '--provider' => "Label84\MailViewer\MailViewerServiceProvider",
-            '--tag' => 'config'
+            '--tag' => 'config',
         ]);
 
         $this->call('vendor:publish', [
             '--provider' => "Label84\MailViewer\MailViewerServiceProvider",
-            '--tag' => 'migrations'
+            '--tag' => 'migrations',
         ]);
 
         $this->info('All done!');
