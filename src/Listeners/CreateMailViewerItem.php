@@ -4,8 +4,7 @@ namespace Label84\MailViewer\Listeners;
 
 use Illuminate\Mail\Events\MessageSent;
 use Label84\MailViewer\Models\MailViewerItem;
-use Swift_Message;
-use Swift_Mime_SimpleHeaderSet;
+use Symfony\Component\Mime\Email;
 
 class CreateMailViewerItem
 {
@@ -27,7 +26,8 @@ class CreateMailViewerItem
         ]);
     }
 
-    private function formatHeaders(Swift_Mime_SimpleHeaderSet $header): array
+    /** @param mixed $headers */
+    private function formatHeaders($header): array
     {
         if (!config('mailviewer.database.include.headers')) {
             return [];
@@ -42,7 +42,7 @@ class CreateMailViewerItem
         ];
     }
 
-    private function formatRecipients(Swift_Message $message): array
+    private function formatRecipients(Email $message): array
     {
         return array_merge(
             ['to' => array_keys($message->getTo() ?: [])],

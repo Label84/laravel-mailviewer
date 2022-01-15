@@ -6,7 +6,8 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/label84/laravel-mailviewer.svg?style=flat-square)](https://packagist.org/packages/label84/laravel-mailviewer)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/label84/laravel-mailviewer/run-tests?label=Tests&style=flat-square)
 
-Laravel MailViewer enables you to view and filter mail that is sent by your Laravel application. It saves all sent mail to the database automatically. It also includes an overview page with the total number of mails sent grouped by Notification.
+With ``laravel-mailviewer`` you can view and filter mail that is sent by your Laravel application in the browser. The package saves all mails sent to the database automatically.
+You can get get an overview of all mails sent, view individual mails and get an overview of the number of mails sent grouped by Notification.
 
 ![MailViewer screenshot](./docs/screenshot_default.png?raw=true "MailViewer Screenshot")
 
@@ -20,24 +21,26 @@ Laravel MailViewer enables you to view and filter mail that is sent by your Lara
   - [Commands](#commands)
   - [Exclude records](#exclude-records)
 - [Tests](#tests)
-- [Security](#security)
 - [License](#license)
 
 ## Requirements
 
-- Laravel 7.x or 8.x
+- Laravel 8.x or 9.x
 - PHP >=7.4 or 8.x
 
 ## Laravel support
 
 | Version | Release |
 |---------|---------|
+| 9.x     | ^3.0    |
 | 8.x     | ^2.0    |
 | 7.x     | ^1.0    |
 
 ## Limitations
 
-This package is only able to track mails send via [SwiftMailer library](https://swiftmailer.symfony.com). By default Laravel uses this library when sending mails via [Mailables](https://laravel.com/docs/8.x/mail) and [Notifications](https://laravel.com/docs/8.x/notifications).
+This package is only able to track mails sent via [Symfony Mailer](https://symfony.com/doc/current/mailer). By default Laravel uses this library when sending mails via [Mailables](https://laravel.com/docs/9.x/mail) and [Notifications](https://laravel.com/docs/9.x/notifications).
+
+Release ``2.0`` of this package supports [Swift Mailer](https://swiftmailer.symfony.com/docs/introduction.html) the default mailer for Laravel 8.x.
 
 ## Installation
 
@@ -150,10 +153,6 @@ In the config file you can add an array of notification classes and an array of 
 composer analyse
 composer test
 ```
-
-## Security
-
-By default the package only applies the 'web and 'auth' middleware to the routes. When used in production make sure you apply additional middleware or other security measures to restrict access.
 
 ## License
 
