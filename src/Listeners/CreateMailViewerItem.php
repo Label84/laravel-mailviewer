@@ -25,7 +25,7 @@ class CreateMailViewerItem
             'notification' => $event->data['__laravel_notification'] ?? null,
             'recipients' => $this->formatRecipients($message),
             'subject' => $message->getSubject(),
-            'body' => $message->getBody(),
+            'body' => $message->getBody()->toString(),
             'sent_at' => now(),
         ]);
     }
