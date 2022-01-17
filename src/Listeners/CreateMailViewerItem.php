@@ -5,40 +5,41 @@ namespace Label84\MailViewer\Listeners;
 use Illuminate\Mail\Events\MessageSent;
 use Label84\MailViewer\Models\MailViewerItem;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Header\Headers;
 
 class CreateMailViewerItem
 {
     public function handle(MessageSent $event): void
     {
-        if (! $this->shouldLog($event)) {
+        if (!$this->shouldLog($event)) {
             return;
         }
+
+        /** @var \Symfony\Component\Mime\Email $message */
+        $message = $event->message;
 
         MailViewerItem::create([
             'event_type' => MessageSent::class,
             'mailer' => config('mail.default') ?? '',
-            'headers' => $this->formatHeaders($event->message->getHeaders()),
+            'headers' => $this->formatHeaders($message->getHeaders()),
             'notification' => $event->data['__laravel_notification'] ?? null,
-            'recipients' => $this->formatRecipients($event->message),
-            'subject' => $event->message->getSubject(),
-            'body' => $event->message->getBody(),
+            'recipients' => $this->formatRecipients($message),
+            'subject' => $message->getSubject(),
+            'body' => $message->getBody(),
             'sent_at' => now(),
         ]);
     }
 
-    /** @param mixed $headers */
-    private function formatHeaders($header): array
+    private function formatHeaders(Headers $headers): array
     {
-        if (! config('mailviewer.database.include.headers')) {
+        if (!config('mailviewer.database.include.headers')) {
             return [];
         }
 
         return [
-            'content-type' => $header->get('content-type')->getFieldBody(),
-            'mime-version' => $header->get('mime-version')->getFieldBody(),
-            'date' => $header->get('date')->getFieldBody(),
-            'message-id' => $header->get('message-id')->getFieldBody(),
-            'from' => $header->get('from')->getFieldBody(),
+            'date' => $headers->get('date'),
+            'message-id' => $headers->get('message-id'),
+            'from' => $headers->get('from'),
         ];
     }
 
@@ -53,17 +54,17 @@ class CreateMailViewerItem
 
     private function shouldLog(MessageSent $event): bool
     {
-        /* Check package enabled */
-        if (! config('mailviewer.enabled')) {
+        /* Make sure package is enabled */
+        if (!config('mailviewer.enabled')) {
             return false;
         }
 
-        /* Check exclude notification list */
+        /* Make sure notification is not in list of excluded notifications */
         if (isset($event->data['__laravel_notification']) && in_array($event->data['__laravel_notification'], config('mailviewer.database.exclude.notification') ?? [])) {
             return false;
         }
 
-        /* Check exclude email list */
+        /* Make sure recipient is not in list of exlcuded email addresses */
         if ($event->message->getTo() && in_array(array_keys($event->message->getTo())[0], config('mailviewer.database.exclude.email') ?? [])) {
             return false;
         }

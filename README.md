@@ -15,7 +15,7 @@ You can get get an overview of all mails sent, view individual mails and get an 
 - [Laravel support](#laravel-support)
 - [Installation](#installation)
 - [Usage](#usage)
-  - [Query filters](#query-filters)
+  - [Filters](#Filters)
   - [Analytics](#analytics)
   - [Examples](#examples)
   - [Commands](#commands)
@@ -52,26 +52,14 @@ Add the package to your application:
 composer require label84/laravel-mailviewer
 ```
 
-You can also manually update your composer.json.
-
-### 2. Install package
-
-Add the config and migration to your application.
-
-```sh
-php artisan mailviewer:install
-```
-
-#### 2.1 Install package manually (alternative)
-
-You can also install the package manually by executing the following two commands.
+### 2. Publish the config file and migration
 
 ```sh
 php artisan vendor:publish --provider="Label84\MailViewer\MailViewerServiceProvider" --tag="config"
 php artisan vendor:publish --provider="Label84\MailViewer\MailViewerServiceProvider" --tag="migrations"
 ```
 
-#### 2.2 Publish the views (optional)
+#### 2.1 Publish the views (optional)
 
 To change the default views, you can publish them to your application.
 
@@ -95,7 +83,7 @@ You can change the url in the config file.
 
 To view the content of the mail you can click on the UUID (blue link).
 
-### Query filters
+### Filters
 
 You can filter the mails in the overview with query parameters - example ``/admin/mailviewer?notification=WelcomeMail``.
 

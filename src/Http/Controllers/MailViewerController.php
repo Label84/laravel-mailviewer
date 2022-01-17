@@ -52,7 +52,7 @@ class MailViewerController extends Controller
                 DB::raw('MAX(sent_at) AS last_sent_at'),
             ])
             ->groupBy('notification')
-            ->orderBy('total', 'DESC')
+            ->orderByDesc('total')
             ->get();
 
         return view('mailviewer::analytics', compact('items'));

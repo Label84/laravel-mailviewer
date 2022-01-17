@@ -16,9 +16,6 @@ parameters:
         -
             message: '#Parameter [a-zA-Z0-9\\_]+ $time of static method Carbon\Carbon::parse() expects DateTimeInterface|string|null, array|string|null given.#'
             path: src/Http/Controllers/MailViewerController.php
-        -
-            message: '#Cannot call method getFieldBody\(\) on Swift_Mime_Header\|null.#'
-            path: src\Listeners\CreateMailViewerItem.php
             
 
     excludePaths:
