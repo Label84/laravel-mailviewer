@@ -11,7 +11,7 @@ class CreateMailViewerItem
 {
     public function handle(MessageSent $event): void
     {
-        if (!$this->shouldLog($event)) {
+        if (! $this->shouldLog($event)) {
             return;
         }
 
@@ -32,7 +32,7 @@ class CreateMailViewerItem
 
     private function formatHeaders(Headers $headers): array
     {
-        if (!config('mailviewer.database.include.headers')) {
+        if (! config('mailviewer.database.include.headers')) {
             return [];
         }
 
@@ -55,7 +55,7 @@ class CreateMailViewerItem
     private function shouldLog(MessageSent $event): bool
     {
         /* Make sure package is enabled */
-        if (!config('mailviewer.enabled')) {
+        if (! config('mailviewer.enabled')) {
             return false;
         }
 
