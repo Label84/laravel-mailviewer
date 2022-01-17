@@ -5,7 +5,6 @@ namespace Label84\MailViewer;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Label84\MailViewer\Console\Commands\CleanupMailViewerItems;
-use Label84\MailViewer\Console\Commands\InstallMailViewer;
 use Label84\MailViewer\Providers\EventServiceProvider;
 
 class MailViewerServiceProvider extends ServiceProvider
@@ -28,7 +27,6 @@ class MailViewerServiceProvider extends ServiceProvider
             }
 
             $this->commands([
-                InstallMailViewer::class,
                 CleanupMailViewerItems::class,
             ]);
         }
