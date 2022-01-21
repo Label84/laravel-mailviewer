@@ -3,6 +3,7 @@
 namespace Label84\MailViewer\Listeners;
 
 use Illuminate\Mail\Events\MessageSent;
+use Illuminate\Support\Collection;
 use Label84\MailViewer\Models\MailViewerItem;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Header\Headers;
@@ -46,9 +47,9 @@ class CreateMailViewerItem
     private function formatRecipients(Email $message): array
     {
         return array_merge(
-            ['to' => array_keys($message->getTo() ?: [])],
-            ['cc' => array_keys($message->getCc() ?: [])],
-            ['bcc' => array_keys($message->getBcc() ?: [])],
+            ['to' => (new Collection($message->getTo()))->map(fn ($address) => $address->getAddress())->toArray()],
+            ['cc' => (new Collection($message->getCc()))->map(fn ($address) => $address->getAddress())->toArray()],
+            ['bcc' => (new Collection($message->getBcc()))->map(fn ($address) => $address->getAddress())->toArray()],
         );
     }
 
@@ -65,7 +66,9 @@ class CreateMailViewerItem
         }
 
         /* Make sure recipient is not in list of exlcuded email addresses */
-        if ($event->message->getTo() && in_array(array_keys($event->message->getTo())[0], config('mailviewer.database.exclude.email') ?? [])) {
+        if ($event->message->getTo() && count((new Collection($event->message->getTo()))
+                ->map(fn ($address) => $address->getAddress())
+                ->rejects(fn ($email) => in_array($email, config('mailviewer.database.exclude.email') ?? []))) == 0) {
             return false;
         }
 
