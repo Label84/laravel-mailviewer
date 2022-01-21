@@ -34,13 +34,12 @@ You can get get an overview of all mails sent, view individual mails and get an 
 |---------|---------|
 | 9.x     | ^3.0    |
 | 8.x     | ^2.0    |
-| 7.x     | ^1.0    |
 
 ## Limitations
 
-This package is only able to track mails sent via [Symfony Mailer](https://symfony.com/doc/current/mailer). By default Laravel uses this library when sending mails via [Mailables](https://laravel.com/docs/9.x/mail) and [Notifications](https://laravel.com/docs/9.x/notifications).
+This package tracks mails sent via [Symfony Mailer](https://symfony.com/doc/current/mailer). Laravel 9 uses this library by default when sending mails via [Mailables](https://laravel.com/docs/master/mail) and [Notifications](https://laravel.com/docs/master/notifications).
 
-Release ``2.0`` of this package supports [Swift Mailer](https://swiftmailer.symfony.com/docs/introduction.html) the default mailer for Laravel 8.x.
+With the upgrade to Laravel 9 the SwiftMailer has been replaced with Symfony Mailer [Upgrade Symfony Mailer](https://laravel.com/docs/master/upgrade#symfony-mailer). To add this package to a Laravel 8 application you have to use version ``^2.0`` of this package - ``composer require "label84/laravel-mailviewer:^2.0"``.
 
 ## Installation
 
