@@ -20,9 +20,15 @@ class ViewTest extends TestCase
     }
 
     /** @test */
-    public function it_has_web_and_auth_as_default_middleware()
+    public function it_has_web_as_default_middleware()
     {
-        $this->assertEquals(['web', 'auth'], config('mailviewer.route.middleware'));
+        $this->assertEquals(['web'], config('mailviewer.route.middleware'));
+    }
+
+    /** @test */
+    public function it_does_not_have_auth_as_default_middleware()
+    {
+        $this->assertNotContains(['auth'], config('mailviewer.route.middleware'));
     }
 
     /** @test */
