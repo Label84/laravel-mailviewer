@@ -16,6 +16,12 @@ parameters:
         -
             message: '#Parameter [a-zA-Z0-9\\_]+ $time of static method Carbon\Carbon::parse() expects DateTimeInterface|string|null, array|string|null given.#'
             path: src/Http/Controllers/MailViewerController.php
+        -   
+            message: '#Unable to resolve the template type TKey in call to function collect#'
+            path: src/Models/MailViewerItem.php
+        -   
+            message: '#Unable to resolve the template type TValue in call to function collect#'
+            path: src/Models/MailViewerItem.php
             
 
     excludePaths:
