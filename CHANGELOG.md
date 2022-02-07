@@ -2,9 +2,9 @@
 
 All notable changes to `laravel-mailviewer` will be documented in this file.
 
-## 3.0 - 2022-01-15
+## 3.0 - 2022-02-07
 
-- Laravel 9 support
+- Laravel 9 support (Symfony Mailer)
 
 ## 2.0 - 2021-12-22
 

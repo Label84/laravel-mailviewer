@@ -76,11 +76,7 @@ php artisan migrate
 
 ## Usage
 
-To preview the mails sent by your application visit: ``/admin/mailviewer``
-
-You can change the url in the config file.
-
-To view the content of the mail you can click on the UUID (blue link).
+To preview the mails sent by your application visit: ``/admin/mailviewer``. You can change this url in the config file.
 
 ### Filters
 
@@ -104,9 +100,9 @@ The around parameter show all mails sent around the given time. By default is wi
 
 ![MailViewer Analytics screenshot](./docs/screenshot_analytics.png?raw=true "MailViewer Analytics Screenshot")
 
-To preview the analytics page visit: ``/admin/mailviewer/analytics``
+To preview the analytics page visit: ``/admin/mailviewer/analytics``. You can change this url in the config file.
 
-You can change the route in the config file.
+On the analytics page you can view the number of mails sent per Notification and see how long ago the latest Notification was sent.
 
 ### Examples
 
@@ -132,7 +128,7 @@ php artisan mailviewer:cleanup --days=30
 
 ### Exclude records
 
-In the config file you can add an array of notification classes and an array of email addresses that should be excluded. Those notifications and email addresses won't be saved to the database.
+In the config file you can add an array of Notification classes and an array of email addresses that should be excluded. Those notifications and email addresses won't be saved to the database.
 
 ## Tests
 
