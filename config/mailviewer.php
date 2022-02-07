@@ -20,7 +20,7 @@ return [
      */
     'route' => [
         'prefix' => 'admin/mailviewer',
-        'middleware' => ['web', 'auth'],
+        'middleware' => ['web'],
     ],
 
     /*

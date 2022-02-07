@@ -6,7 +6,8 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/label84/laravel-mailviewer.svg?style=flat-square)](https://packagist.org/packages/label84/laravel-mailviewer)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/label84/laravel-mailviewer/run-tests?label=Tests&style=flat-square)
 
-Laravel MailViewer enables you to view and filter mail that is sent by your Laravel application. It saves all sent mail to the database automatically. It also includes an overview page with the total number of mails sent grouped by Notification.
+With ``laravel-mailviewer`` you can view and filter mail that is sent by your Laravel application in the browser. The package saves all mails sent to the database automatically.
+You can get get an overview of all mails sent, view individual mails and get an overview of the number of mails sent grouped by Notification.
 
 ![MailViewer screenshot](./docs/screenshot_default.png?raw=true "MailViewer Screenshot")
 
@@ -14,30 +15,31 @@ Laravel MailViewer enables you to view and filter mail that is sent by your Lara
 - [Laravel support](#laravel-support)
 - [Installation](#installation)
 - [Usage](#usage)
-  - [Query filters](#query-filters)
+  - [Filters](#Filters)
   - [Analytics](#analytics)
   - [Examples](#examples)
   - [Commands](#commands)
   - [Exclude records](#exclude-records)
 - [Tests](#tests)
-- [Security](#security)
 - [License](#license)
 
 ## Requirements
 
-- Laravel 7.x or 8.x
+- Laravel 8.x or 9.x
 - PHP >=7.4 or 8.x
 
 ## Laravel support
 
 | Version | Release |
 |---------|---------|
+| 9.x     | ^3.0    |
 | 8.x     | ^2.0    |
-| 7.x     | ^1.0    |
 
 ## Limitations
 
-This package is only able to track mails send via [SwiftMailer library](https://swiftmailer.symfony.com). By default Laravel uses this library when sending mails via [Mailables](https://laravel.com/docs/8.x/mail) and [Notifications](https://laravel.com/docs/8.x/notifications).
+This package tracks mails sent via [Symfony Mailer](https://symfony.com/doc/current/mailer). Laravel 9 uses this library by default when sending mails via [Mailables](https://laravel.com/docs/master/mail) and [Notifications](https://laravel.com/docs/master/notifications).
+
+With the upgrade to Laravel 9 the SwiftMailer has been replaced with Symfony Mailer [Upgrade Symfony Mailer](https://laravel.com/docs/master/upgrade#symfony-mailer). To add this package to a Laravel 8 application you have to use version ``^2.0`` of this package - ``composer require "label84/laravel-mailviewer:^2.0"``.
 
 ## Installation
 
@@ -49,26 +51,14 @@ Add the package to your application:
 composer require label84/laravel-mailviewer
 ```
 
-You can also manually update your composer.json.
-
-### 2. Install package
-
-Add the config and migration to your application.
-
-```sh
-php artisan mailviewer:install
-```
-
-#### 2.1 Install package manually (alternative)
-
-You can also install the package manually by executing the following two commands.
+### 2. Publish the config file and migration
 
 ```sh
 php artisan vendor:publish --provider="Label84\MailViewer\MailViewerServiceProvider" --tag="config"
 php artisan vendor:publish --provider="Label84\MailViewer\MailViewerServiceProvider" --tag="migrations"
 ```
 
-#### 2.2 Publish the views (optional)
+#### 2.1 Publish the views (optional)
 
 To change the default views, you can publish them to your application.
 
@@ -86,13 +76,9 @@ php artisan migrate
 
 ## Usage
 
-To preview the mails sent by your application visit: ``/admin/mailviewer``
+To preview the mails sent by your application visit: ``/admin/mailviewer``. You can change this url in the config file.
 
-You can change the url in the config file.
-
-To view the content of the mail you can click on the UUID (blue link).
-
-### Query filters
+### Filters
 
 You can filter the mails in the overview with query parameters - example ``/admin/mailviewer?notification=WelcomeMail``.
 
@@ -114,9 +100,9 @@ The around parameter show all mails sent around the given time. By default is wi
 
 ![MailViewer Analytics screenshot](./docs/screenshot_analytics.png?raw=true "MailViewer Analytics Screenshot")
 
-To preview the analytics page visit: ``/admin/mailviewer/analytics``
+To preview the analytics page visit: ``/admin/mailviewer/analytics``. You can change this url in the config file.
 
-You can change the route in the config file.
+On the analytics page you can view the number of mails sent per Notification and see how long ago the latest Notification was sent.
 
 ### Examples
 
@@ -142,7 +128,7 @@ php artisan mailviewer:cleanup --days=30
 
 ### Exclude records
 
-In the config file you can add an array of notification classes and an array of email addresses that should be excluded. Those notifications and email addresses won't be saved to the database.
+In the config file you can add an array of Notification classes and an array of email addresses that should be excluded. Those notifications and email addresses won't be saved to the database.
 
 ## Tests
 
@@ -150,10 +136,6 @@ In the config file you can add an array of notification classes and an array of 
 composer analyse
 composer test
 ```
-
-## Security
-
-By default the package only applies the 'web and 'auth' middleware to the routes. When used in production make sure you apply additional middleware or other security measures to restrict access.
 
 ## License
 

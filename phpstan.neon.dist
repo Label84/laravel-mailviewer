@@ -9,18 +9,21 @@ parameters:
         - routes
         - config
 
-    # The level 8 is the highest level
+    # The level 9 is the highest level
     level: 8
 
     ignoreErrors:
         -
             message: '#Parameter [a-zA-Z0-9\\_]+ $time of static method Carbon\Carbon::parse() expects DateTimeInterface|string|null, array|string|null given.#'
             path: src/Http/Controllers/MailViewerController.php
-        -
-            message: '#Cannot call method getFieldBody\(\) on Swift_Mime_Header\|null.#'
-            path: src\Listeners\CreateMailViewerItem.php
+        -   
+            message: '#Unable to resolve the template type TKey in call to function collect#'
+            path: src/Models/MailViewerItem.php
+        -   
+            message: '#Unable to resolve the template type TValue in call to function collect#'
+            path: src/Models/MailViewerItem.php
             
 
-    excludes_analyse:
+    excludePaths:
 
     checkMissingIterableValueType: false

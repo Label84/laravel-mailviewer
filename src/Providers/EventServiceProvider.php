@@ -9,7 +9,9 @@ use Label84\MailViewer\Listeners\CreateMailViewerItem;
 class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
-        MessageSent::class => [CreateMailViewerItem::class],
+        MessageSent::class => [
+            CreateMailViewerItem::class,
+        ],
     ];
 
     public function boot(): void

@@ -3,68 +3,72 @@
 namespace Label84\MailViewer\Listeners;
 
 use Illuminate\Mail\Events\MessageSent;
+use Illuminate\Support\Collection;
 use Label84\MailViewer\Models\MailViewerItem;
-use Swift_Message;
-use Swift_Mime_SimpleHeaderSet;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Header\Headers;
 
 class CreateMailViewerItem
 {
     public function handle(MessageSent $event): void
     {
-        if (!$this->shouldLog($event)) {
+        if (! $this->shouldLog($event)) {
             return;
         }
+
+        /** @var \Symfony\Component\Mime\Email $message */
+        $message = $event->message;
 
         MailViewerItem::create([
             'event_type' => MessageSent::class,
             'mailer' => config('mail.default') ?? '',
-            'headers' => $this->formatHeaders($event->message->getHeaders()),
+            'headers' => $this->formatHeaders($message->getHeaders()),
             'notification' => $event->data['__laravel_notification'] ?? null,
-            'recipients' => $this->formatRecipients($event->message),
-            'subject' => $event->message->getSubject(),
-            'body' => $event->message->getBody(),
+            'recipients' => $this->formatRecipients($message),
+            'subject' => $message->getSubject(),
+            'body' => $message->getHtmlBody(),
             'sent_at' => now(),
         ]);
     }
 
-    private function formatHeaders(Swift_Mime_SimpleHeaderSet $header): array
+    private function formatHeaders(Headers $headers): array
     {
-        if (!config('mailviewer.database.include.headers')) {
+        if (! config('mailviewer.database.include.headers')) {
             return [];
         }
 
         return [
-            'content-type' => $header->get('content-type')->getFieldBody(),
-            'mime-version' => $header->get('mime-version')->getFieldBody(),
-            'date' => $header->get('date')->getFieldBody(),
-            'message-id' => $header->get('message-id')->getFieldBody(),
-            'from' => $header->get('from')->getFieldBody(),
+            'date' => $headers->get('date'),
+            'message-id' => $headers->get('message-id'),
+            'from' => $headers->get('from'),
         ];
     }
 
-    private function formatRecipients(Swift_Message $message): array
+    private function formatRecipients(Email $message): array
     {
         return array_merge(
-            ['to' => array_keys($message->getTo() ?: [])],
-            ['cc' => array_keys($message->getCc() ?: [])],
-            ['bcc' => array_keys($message->getBcc() ?: [])],
+            ['to' => (new Collection($message->getTo()))->map(fn ($address) => $address->getAddress())->toArray()],
+            ['cc' => (new Collection($message->getCc()))->map(fn ($address) => $address->getAddress())->toArray()],
+            ['bcc' => (new Collection($message->getBcc()))->map(fn ($address) => $address->getAddress())->toArray()],
         );
     }
 
     private function shouldLog(MessageSent $event): bool
     {
-        /* Check package enabled */
-        if (!config('mailviewer.enabled')) {
+        /* Make sure package is enabled */
+        if (! config('mailviewer.enabled')) {
             return false;
         }
 
-        /* Check exclude notification list */
+        /* Make sure notification is not in list of excluded notifications */
         if (isset($event->data['__laravel_notification']) && in_array($event->data['__laravel_notification'], config('mailviewer.database.exclude.notification') ?? [])) {
             return false;
         }
 
-        /* Check exclude email list */
-        if ($event->message->getTo() && in_array(array_keys($event->message->getTo())[0], config('mailviewer.database.exclude.email') ?? [])) {
+        /* Make sure recipient is not in list of exlcuded email addresses */
+        if ($event->message->getTo() && count((new Collection($event->message->getTo()))
+                ->map(fn ($address) => $address->getAddress())
+                ->reject(fn ($email) => in_array($email, config('mailviewer.database.exclude.email') ?? []))) == 0) {
             return false;
         }
 
