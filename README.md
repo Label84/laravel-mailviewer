@@ -6,16 +6,15 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/label84/laravel-mailviewer.svg?style=flat-square)](https://packagist.org/packages/label84/laravel-mailviewer)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/label84/laravel-mailviewer/run-tests?label=Tests&style=flat-square)
 
-With ``laravel-mailviewer`` you can view and filter mail that is sent by your Laravel application in the browser. The package saves all mails sent to the database automatically.
-You can get get an overview of all mails sent, view individual mails and get an overview of the number of mails sent grouped by Notification.
+Mailviewer enables you to view and filter mail that is sent by your Laravel application in the browser. The Analytics page gives you insight in the amount of mails sent sent by your application grouped by Notification.
 
-![MailViewer screenshot](./docs/screenshot_default.png?raw=true "MailViewer Screenshot")
+![MailViewer screenshot](./docs/screenshot-default.png?raw=true "MailViewer Screenshot")
 
 - [Requirements](#requirements)
 - [Laravel support](#laravel-support)
 - [Installation](#installation)
 - [Usage](#usage)
-  - [Filters](#Filters)
+  - [Filters](#filters)
   - [Analytics](#analytics)
   - [Examples](#examples)
   - [Commands](#commands)
@@ -44,8 +43,6 @@ With the upgrade to Laravel 9 the SwiftMailer has been replaced with Symfony Mai
 ## Installation
 
 ### 1. Require package
-
-Add the package to your application:
 
 ```sh
 composer require label84/laravel-mailviewer
@@ -98,11 +95,11 @@ The around parameter show all mails sent around the given time. By default is wi
 
 ### Analytics
 
-![MailViewer Analytics screenshot](./docs/screenshot_analytics.png?raw=true "MailViewer Analytics Screenshot")
+![MailViewer Analytics screenshot](./docs/screenshot-analytics.png?raw=true "MailViewer Analytics Screenshot")
 
 To preview the analytics page visit: ``/admin/mailviewer/analytics``. You can change this url in the config file.
 
-On the analytics page you can view the number of mails sent per Notification and see how long ago the latest Notification was sent.
+On the analytics page you can view the number of mails sent per Notification and the latest time this notification was sent.
 
 ### Examples
 
