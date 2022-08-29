@@ -3,58 +3,92 @@
 return [
 
     /*
-     * Enable the package
+     * Enable the package.
      *
      * @type boolean
      */
     'enabled' => true,
 
     /*
-     * Database settings
+     * The table name in the database used to store the mails.
      */
     'table_name' => 'mail_viewer_items',
+
+    /**
+     * The database connection to the table.
+     */
     'database_connection' => env('DB_CONNECTION', 'mysql'),
 
-    /*
-     * Route settings
-     */
     'route' => [
-        'prefix' => 'admin/mailviewer',
-        'middleware' => ['web'],
+        /**
+         * URL to visit the page.
+         */
+        'prefix' => '/admin/mailviewer',
+
+        /**
+         * Apply Middleware to prevent unwanted access to the page.
+         */
+        'middleware' => [
+            'web',
+            // 'auth',
+        ],
     ],
 
-    /*
-     * View settings
-     */
     'view' => [
+        /**
+         * Sets the name on the overview page.
+         */
         'title' => 'MailViewer',
-        'items_per_page' => 50,
-        'use_tabs' => false,
-        'show_mailer' => true,
-    ],
 
-    /*
-     * Database settings
-     */
-    'database' => [
+        /**
+         * Sets the name on the overview page.
+         */
+        'analytics_title' => 'MailViewer Analytics',
+
+        /**
+         * Limit the number of items per page.
+         */
+        'items_per_page' => 50,
 
         /*
-         * If set, it will save additional message data to the headers column in the database table.
+        * Open a new tab to preview the mail.
          */
+        'use_tabs' => false,
+
+        /**
+         * Hide/show the mailer name in the top-right corner.
+         */
+        'show_mailer' => true,
+
+        /**
+         * Set the preferred URL for the 'Back to Laravel' link
+         */
+        'back_to_application_link_url' => '/',
+
+        /**
+         * Set the title for the 'Back to Laravel' link
+         */
+        'back_to_application_link_title' => 'Back to Laravel',
+    ],
+
+    'database' => [
         'include' => [
+            /**
+             * Store additional message data to the headers column.
+             */
             'headers' => true,
         ],
 
         'exclude' => [
             /*
-             * All notification listed, are excluded and won't be saved to the database.
+             * Exclude notifications to be stored in the database.
              */
             'notification' => [
                 // '\Illuminate\Auth\Notifications\ResetPassword',
             ],
 
             /*
-             * All email addresses listed [to], are excluded and won't be saved to the database.
+             * Exclude all notifications sent to certain email addresses to be stored in the database.
              */
             'email' => [
                 // 'info@example.com',

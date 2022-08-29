@@ -16,7 +16,7 @@ class ViewTest extends TestCase
     /** @test */
     public function it_has_admin_mailviewer_as_default_route_prefix()
     {
-        $this->assertEquals('admin/mailviewer', config('mailviewer.route.prefix'));
+        $this->assertEquals('/admin/mailviewer', config('mailviewer.route.prefix'));
     }
 
     /** @test */
