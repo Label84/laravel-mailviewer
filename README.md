@@ -4,7 +4,7 @@
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![Quality Score](https://img.shields.io/scrutinizer/g/label84/laravel-mailviewer.svg?style=flat-square)](https://scrutinizer-ci.com/g/label84/laravel-mailviewer)
 [![Total Downloads](https://img.shields.io/packagist/dt/label84/laravel-mailviewer.svg?style=flat-square)](https://packagist.org/packages/label84/laravel-mailviewer)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/label84/laravel-mailviewer/run-tests?label=Tests&style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/label84/laravel-mailviewer/run-tests.yml?branch=master&style=flat-square)
 
 Mailviewer enables you to view and filter mail that is sent by your Laravel application in the browser. The Analytics page gives you insight in the amount of mails sent sent by your application grouped by Notification.
 
