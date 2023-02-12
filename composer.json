@@ -6,19 +6,19 @@
     "authors": [
         {
             "name": "Label84",
-            "email": "info@tjardo.com"
+            "email": "info@label84.com"
         }
     ],
     "require": {
         "php": "^8.0",
-        "illuminate/auth": "^9.0",
-        "illuminate/routing": "^9.0",
-        "illuminate/support": "^9.0",
-        "illuminate/database": "^9.0"
-    },    
+        "illuminate/auth": "^9.0|^10.0",
+        "illuminate/routing": "^9.0|^10.0",
+        "illuminate/support": "^9.0|^10.0",
+        "illuminate/database": "^9.0|^10.0"
+    },
     "require-dev": {
-        "orchestra/testbench": "^7.0",
-        "nunomaduro/larastan": "^1.0",
+        "orchestra/testbench": "^7.0|^8.0",
+        "nunomaduro/larastan": "^2.0",
         "phpunit/phpunit": "^9.5"
     },
     "extra": {

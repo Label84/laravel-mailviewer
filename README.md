@@ -10,8 +10,7 @@ Mailviewer enables you to view and filter mail that is sent by your Laravel appl
 
 ![MailViewer screenshot](./docs/screenshot-default.png?raw=true "MailViewer Screenshot")
 
-- [Requirements](#requirements)
-- [Laravel support](#laravel-support)
+- [Laravel Support](#laravel-support)
 - [Installation](#installation)
 - [Usage](#usage)
   - [Filters](#filters)
@@ -22,15 +21,11 @@ Mailviewer enables you to view and filter mail that is sent by your Laravel appl
 - [Tests](#tests)
 - [License](#license)
 
-## Requirements
-
-- Laravel 8.x or 9.x
-- PHP >=7.4 or 8.x
-
-## Laravel support
+## Laravel Support
 
 | Version | Release |
 |---------|---------|
+| 10.x    | ^3.0    |
 | 9.x     | ^3.0    |
 | 8.x     | ^2.0    |
 
@@ -38,7 +33,7 @@ Mailviewer enables you to view and filter mail that is sent by your Laravel appl
 
 This package tracks mails sent via [Symfony Mailer](https://symfony.com/doc/current/mailer). Laravel 9 uses this library by default when sending mails via [Mailables](https://laravel.com/docs/master/mail) and [Notifications](https://laravel.com/docs/master/notifications).
 
-With the upgrade to Laravel 9 the SwiftMailer has been replaced with Symfony Mailer [Upgrade Symfony Mailer](https://laravel.com/docs/master/upgrade#symfony-mailer). To add this package to a Laravel 8 application you have to use version ``^2.0`` of this package - ``composer require "label84/laravel-mailviewer:^2.0"``.
+With the upgrade from Laravel 8 to Laravel 9 the SwiftMailer has been replaced with Symfony Mailer [Upgrade Symfony Mailer](https://laravel.com/docs/master/upgrade#symfony-mailer). To add this package to a Laravel 8 application you have to use version `^2.0` of this package - `composer require "label84/laravel-mailviewer:^2.0"`.
 
 ## Installation
 
@@ -73,11 +68,11 @@ php artisan migrate
 
 ## Usage
 
-To preview the mails sent by your application visit: ``/admin/mailviewer``. You can change this url in the config file.
+To preview the mails sent by your application visit: `/admin/mailviewer`. You can change this url in the config file.
 
 ### Filters
 
-You can filter the mails in the overview with query parameters - example ``/admin/mailviewer?notification=WelcomeMail``.
+You can filter the mails in the overview with query parameters - example `/admin/mailviewer?notification=WelcomeMail`.
 
 | Parameter     | Value                                    | Example           |
 |:--------------|:-----------------------------------------|:------------------|
@@ -97,7 +92,7 @@ The around parameter show all mails sent around the given time. By default is wi
 
 ![MailViewer Analytics screenshot](./docs/screenshot-analytics.png?raw=true "MailViewer Analytics Screenshot")
 
-To preview the analytics page visit: ``/admin/mailviewer/analytics``. You can change this url in the config file.
+To preview the analytics page visit: `/admin/mailviewer/analytics`. You can change this url in the config file.
 
 On the analytics page you can view the number of mails sent per Notification and the latest time this notification was sent.
 
@@ -107,13 +102,13 @@ On the analytics page you can view the number of mails sent per Notification and
 
 View all VerifyEmail mails to info@example.com.
 
-``/admin/mailviewer?to=info@example.com&notification=VerifyEmail``
+`/admin/mailviewer?to=info@example.com&notification=VerifyEmail`
 
 #### Example #2
 
 View all mails sent in the last 2 hours.
 
-``/admin/mailviewer?from=2 hours ago``
+`/admin/mailviewer?from=2 hours ago`
 
 ### Commands
 
