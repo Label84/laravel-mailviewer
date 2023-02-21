@@ -7,7 +7,7 @@ return [
      *
      * @type boolean
      */
-    'enabled' => true,
+    'enabled' => env('MAILVIEWER_ENABLED', true),
 
     /*
      * The table name in the database used to store the mails.

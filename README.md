@@ -70,6 +70,8 @@ php artisan migrate
 
 To preview the mails sent by your application visit: `/admin/mailviewer`. You can change this url in the config file.
 
+You can add `MAILVIEWER_ENABLED=true` to your `.env` file.
+
 ### Filters
 
 You can filter the mails in the overview with query parameters - example `/admin/mailviewer?notification=WelcomeMail`.
