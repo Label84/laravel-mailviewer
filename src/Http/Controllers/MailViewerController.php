@@ -44,7 +44,7 @@ class MailViewerController extends Controller
 
     public function analytics(): View
     {
-        $items = DB::table('mail_viewer_items')
+        $items = DB::table(config('mailviewer.table_name'))
             ->whereNotNull('notification')
             ->select([
                 DB::raw('notification AS name'),

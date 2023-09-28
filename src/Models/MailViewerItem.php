@@ -18,6 +18,14 @@ class MailViewerItem extends Model
 {
     use HasFactory;
 
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->setTable(config('mailviewer.table_name', 'mail_viewer_items'));
+        $this->setConnection(config('mailviewer.database_connection', 'mysql'));
+    }
+
     public static function booted(): void
     {
         static::creating(function (self $mailViewerItem) {
