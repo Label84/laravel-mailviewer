@@ -14,8 +14,7 @@ class ListensOnMailEventsTest extends TestCase
         parent::setUp();
     }
 
-    /** @test */
-    public function it_triggers_the_listener_on_message_sent_event()
+    public function test_it_triggers_the_listener_on_message_sent_event()
     {
         Notification::route('mail', 'info@example.com')->notify(new TestNotification());
 

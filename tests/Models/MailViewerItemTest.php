@@ -15,8 +15,7 @@ class MailViewerItemTest extends TestCase
         parent::setUp();
     }
 
-    /** @test */
-    public function it_has_the_required_columns()
+    public function test_it_has_the_required_columns()
     {
         $this->assertTrue(
             Schema::hasColumns(with(new MailViewerItem())->getTable(), [
@@ -29,19 +28,18 @@ class MailViewerItemTest extends TestCase
                 'subject',
                 'body',
                 'sent_at',
-        ]));
+        ])
+        );
     }
 
-    /** @test */
-    public function it_will_set_an_uuid_when_created()
+    public function test_it_will_set_an_uuid_when_created()
     {
         $item = MailViewerItem::factory()->create();
 
         $this->assertTrue(preg_match(LazyUuidFromString::VALID_REGEX, $item->uuid) === 1);
     }
 
-    /** @test */
-    public function it_orders_items_by_date_desc_by_default()
+    public function test_it_orders_items_by_date_desc_by_default()
     {
         $this->assertEquals((new MailViewerItem())->getGlobalScope('order'), function (Builder $builder) {
             $builder->orderBy('sent_at', 'desc');

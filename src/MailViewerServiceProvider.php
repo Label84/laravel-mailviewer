@@ -4,7 +4,6 @@ namespace Label84\MailViewer;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Label84\MailViewer\Console\Commands\CleanupMailViewerItems;
 use Label84\MailViewer\Providers\EventServiceProvider;
 
 class MailViewerServiceProvider extends ServiceProvider
@@ -25,10 +24,6 @@ class MailViewerServiceProvider extends ServiceProvider
                     __DIR__.'/../database/migrations/create_mail_viewer_items_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_mail_viewer_items_table.php'),
                 ], 'migrations');
             }
-
-            $this->commands([
-                CleanupMailViewerItems::class,
-            ]);
         }
 
         $this->registerRoutes();

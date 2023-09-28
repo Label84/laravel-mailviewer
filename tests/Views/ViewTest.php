@@ -13,26 +13,22 @@ class ViewTest extends TestCase
         parent::setUp();
     }
 
-    /** @test */
-    public function it_has_admin_mailviewer_as_default_route_prefix()
+    public function test_it_has_admin_mailviewer_as_default_route_prefix()
     {
         $this->assertEquals('/admin/mailviewer', config('mailviewer.route.prefix'));
     }
 
-    /** @test */
-    public function it_has_web_as_default_middleware()
+    public function test_it_has_web_as_default_middleware()
     {
         $this->assertEquals(['web'], config('mailviewer.route.middleware'));
     }
 
-    /** @test */
-    public function it_does_not_have_auth_as_default_middleware()
+    public function test_it_does_not_have_auth_as_default_middleware()
     {
         $this->assertNotContains(['auth'], config('mailviewer.route.middleware'));
     }
 
-    /** @test */
-    public function it_can_list_the_mail_viewer_items()
+    public function test_it_can_list_the_mail_viewer_items()
     {
         $response = $this->withoutMiddleware()->get(route('mailviewer.index'));
 
@@ -41,8 +37,7 @@ class ViewTest extends TestCase
         $response->assertViewHas('mails', MailViewerItem::paginate(50));
     }
 
-    /** @test */
-    public function it_can_list_the_mail_viewer_items_with_to_cc_bcc_query_filter()
+    public function test_it_can_list_the_mail_viewer_items_with_to_cc_bcc_query_filter()
     {
         MailViewerItem::factory()->create([
             'recipients' => ['to' => ['test@example.com'], 'cc' => [], 'bcc' => []],
@@ -56,8 +51,7 @@ class ViewTest extends TestCase
         $response->assertViewHas('mails');
     }
 
-    /** @test */
-    public function it_can_list_the_mail_viewer_items_with_notification_base_class_query_filter()
+    public function test_it_can_list_the_mail_viewer_items_with_notification_base_class_query_filter()
     {
         $class = class_basename(\Illuminate\Auth\Notifications\VerifyEmail::class);
 
@@ -70,8 +64,7 @@ class ViewTest extends TestCase
             ->appends(['notification' => $class]));
     }
 
-    /** @test */
-    public function it_can_list_the_mail_viewer_items_with_from_query_filter()
+    public function test_it_can_list_the_mail_viewer_items_with_from_query_filter()
     {
         collect(range(1, 50))->each(function (int $i) {
             MailViewerItem::factory()->create([
@@ -92,8 +85,7 @@ class ViewTest extends TestCase
             ->appends(['from' => $fromDate]));
     }
 
-    /** @test */
-    public function it_can_list_the_mail_viewer_items_with_till_query_filter()
+    public function test_it_can_list_the_mail_viewer_items_with_till_query_filter()
     {
         collect(range(1, 50))->each(function (int $i) {
             MailViewerItem::factory()->create([
@@ -114,8 +106,7 @@ class ViewTest extends TestCase
             ->appends(['till' => $tillDate]));
     }
 
-    /** @test */
-    public function it_can_list_the_mail_viewer_items_with_around_query_filter()
+    public function test_it_can_list_the_mail_viewer_items_with_around_query_filter()
     {
         collect(range(1, 50))->each(function (int $i) {
             MailViewerItem::factory()->create([
@@ -139,8 +130,7 @@ class ViewTest extends TestCase
             ->appends(['around' => $aroundTime]));
     }
 
-    /** @test */
-    public function it_can_list_the_mail_viewer_items_with_around_and_d_query_filter()
+    public function test_it_can_list_the_mail_viewer_items_with_around_and_d_query_filter()
     {
         collect(range(1, 50))->each(function (int $i) {
             MailViewerItem::factory()->create([
@@ -167,8 +157,7 @@ class ViewTest extends TestCase
             ->appends(['around' => $aroundTime, 'd' => 5]));
     }
 
-    /** @test */
-    public function it_has_pagination_when_item_count_is_more_than_item_per_page()
+    public function test_it_has_pagination_when_item_count_is_more_than_item_per_page()
     {
         MailViewerItem::factory()->count(60)->create();
 
@@ -181,8 +170,7 @@ class ViewTest extends TestCase
         $response->assertViewHas('mails', MailViewerItem::paginate(50));
     }
 
-    /** @test */
-    public function it_can_show_the_mail_viewer_item_preview()
+    public function test_it_can_show_the_mail_viewer_item_preview()
     {
         MailViewerItem::factory()->create();
 
@@ -191,8 +179,7 @@ class ViewTest extends TestCase
         $response->assertSuccessful();
     }
 
-    /** @test */
-    public function it_can_show_the_mail_viewer_analytics()
+    public function test_it_can_show_the_mail_viewer_analytics()
     {
         MailViewerItem::factory()->count(20)->create();
 

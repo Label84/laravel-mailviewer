@@ -3,65 +3,66 @@
 return [
 
     /*
-     * Enable the package.
+     * Enable/disable MailViewer
      *
      * @type boolean
      */
     'enabled' => env('MAILVIEWER_ENABLED', true),
 
     /*
-     * The table name in the database used to store the mails.
+     * Table name in the database
      */
     'table_name' => 'mail_viewer_items',
 
     /**
-     * The database connection to the table.
+     * Database connection to use
      */
     'database_connection' => env('DB_CONNECTION', 'mysql'),
 
     'route' => [
         /**
-         * URL to visit the page.
+         * The prefix for routes
          */
         'prefix' => '/admin/mailviewer',
 
         /**
-         * Apply Middleware to prevent unwanted access to the page.
+         * The middleware to use for all routes
          */
         'middleware' => [
             'web',
             // 'auth',
+            // TODO: add your (admin) middleware to prevent unwanted access
         ],
     ],
 
     'view' => [
         /**
-         * Sets the name on the overview page.
+         * Sets the name on the overview page
          */
         'title' => 'MailViewer',
 
         /**
-         * Sets the name on the overview page.
+         * Sets the name on the analytics page
          */
         'analytics_title' => 'MailViewer Analytics',
 
         /**
-         * Limit the number of items per page.
+         * Sets the number of items per page on the overview page
          */
         'items_per_page' => 50,
 
         /*
-        * Open a new tab to preview the mail.
+        * Open the mail in a new tab or in the same tab
          */
         'use_tabs' => false,
 
         /**
-         * Hide/show the mailer name in the top-right corner.
+         * Show the mailer information on the overview page
          */
         'show_mailer' => true,
 
         /**
-         * Set the preferred URL for the 'Back to Laravel' link
+         * Sets the preferred URL for the 'Back to Laravel' link
          */
         'back_to_application_link_url' => '/',
 
@@ -74,30 +75,25 @@ return [
     'database' => [
         'include' => [
             /**
-             * Store additional message data to the headers column.
+             * Store additional message data to the headers column
              */
             'headers' => true,
         ],
 
         'exclude' => [
             /*
-             * Exclude notifications to be stored in the database.
+             * Notifications to exclude from being stored in the database
              */
             'notification' => [
                 // '\Illuminate\Auth\Notifications\ResetPassword',
             ],
 
             /*
-             * Exclude all notifications sent to certain email addresses to be stored in the database.
+             * Notifications to email addresses to exclude from being stored in the database
              */
             'email' => [
                 // 'info@example.com',
             ],
         ],
     ],
-
-    /*
-     * When the cleanup command is executed, all records older than the days specified will be deleted.
-     */
-    'delete_items_older_than_days' => 30,
 ];

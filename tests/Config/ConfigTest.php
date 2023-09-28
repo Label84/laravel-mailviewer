@@ -14,8 +14,7 @@ class ConfigTest extends TestCase
         parent::setUp();
     }
 
-    /** @test */
-    public function it_does_not_an_item_when_disabled()
+    public function test_it_does_not_an_item_when_disabled()
     {
         config()->set('mailviewer.enabled', false);
 
@@ -24,8 +23,7 @@ class ConfigTest extends TestCase
         $this->assertCount(0, MailViewerItem::all());
     }
 
-    /** @test */
-    public function it_does_not_create_an_item_when_notification_is_in_exclude_notification_list()
+    public function test_it_does_not_create_an_item_when_notification_is_in_exclude_notification_list()
     {
         config()->set('mailviewer.database.exclude.notification', [
             TestNotification::class,
@@ -36,8 +34,7 @@ class ConfigTest extends TestCase
         $this->assertCount(0, MailViewerItem::all());
     }
 
-    /** @test */
-    public function it_does_not_create_an_item_when_email_is_in_exclude_email_list()
+    public function test_it_does_not_create_an_item_when_email_is_in_exclude_email_list()
     {
         config()->set('mailviewer.database.exclude.email', [
             'info@example.com',

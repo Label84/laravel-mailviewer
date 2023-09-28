@@ -65,7 +65,7 @@ class CreateMailViewerItem
             return false;
         }
 
-        /* Make sure recipient is not in list of exlcuded email addresses */
+        /* Make sure recipient is not in list of excluded email addresses */
         if ($event->message->getTo() && count((new Collection($event->message->getTo()))
                 ->map(fn ($address) => $address->getAddress())
                 ->reject(fn ($email) => in_array($email, config('mailviewer.database.exclude.email') ?? []))) == 0) {

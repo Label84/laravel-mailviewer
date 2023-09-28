@@ -16,8 +16,7 @@ Mailviewer enables you to view and filter mail that is sent by your Laravel appl
   - [Filters](#filters)
   - [Analytics](#analytics)
   - [Examples](#examples)
-  - [Commands](#commands)
-  - [Exclude records](#exclude-records)
+  - [Exclusion list](#exclusion-list)
 - [Tests](#tests)
 - [License](#license)
 
@@ -27,13 +26,10 @@ Mailviewer enables you to view and filter mail that is sent by your Laravel appl
 |---------|---------|
 | 10.x    | ^3.0    |
 | 9.x     | ^3.0    |
-| 8.x     | ^2.0    |
 
 ## Limitations
 
-This package tracks mails sent via [Symfony Mailer](https://symfony.com/doc/current/mailer). Laravel 9 uses this library by default when sending mails via [Mailables](https://laravel.com/docs/master/mail) and [Notifications](https://laravel.com/docs/master/notifications).
-
-With the upgrade from Laravel 8 to Laravel 9 the SwiftMailer has been replaced with Symfony Mailer [Upgrade Symfony Mailer](https://laravel.com/docs/master/upgrade#symfony-mailer). To add this package to a Laravel 8 application you have to use version `^2.0` of this package - `composer require "label84/laravel-mailviewer:^2.0"`.
+This package tracks mails sent via Laravel's `Mailables` and `Notifications`.
 
 ## Installation
 
@@ -78,9 +74,9 @@ You can filter the mails in the overview with query parameters - example `/admin
 
 | Parameter     | Value                                    | Example           |
 |:--------------|:-----------------------------------------|:------------------|
-| to=           | email                                    | info@example.com  |
-| cc=           | email                                    | info@example.com  |
-| bcc=          | email                                    | info@example.com  |
+| to=           | email                                    | [info@example.com](info@example.com)  |
+| cc=           | email                                    | [info@example.com](info@example.com)  |
+| bcc=          | email                                    | [info@example.com](info@example.com)  |
 | notification= | class basename of Notification           | VerifyEmail       |
 | from=         | [Carbon](https://carbon.nesbot.com/docs) | 2 hours ago       |
 | till=         | [Carbon](https://carbon.nesbot.com/docs) | yesterday         |
@@ -102,7 +98,7 @@ On the analytics page you can view the number of mails sent per Notification and
 
 #### Example #1
 
-View all VerifyEmail mails to info@example.com.
+View all VerifyEmail mails to [info@example.com](info@example.com).
 
 `/admin/mailviewer?to=info@example.com&notification=VerifyEmail`
 
@@ -112,15 +108,7 @@ View all mails sent in the last 2 hours.
 
 `/admin/mailviewer?from=2 hours ago`
 
-### Commands
-
-The package has has a built-in command to clean up older database records. Add this command to your Kernel and run it daily/weekly.
-
-```sh
-php artisan mailviewer:cleanup --days=30
-```
-
-### Exclude records
+### Exclusion list
 
 In the config file you can add an array of Notification classes and an array of email addresses that should be excluded. Those notifications and email addresses won't be saved to the database.
 
