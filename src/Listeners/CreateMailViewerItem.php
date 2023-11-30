@@ -32,10 +32,10 @@ class CreateMailViewerItem
         ]);
     }
 
-    private function formatHeaders(Headers $headers): array
+    private function formatHeaders(Headers $headers): ?array
     {
         if (! config('mailviewer.database.include.headers')) {
-            return [];
+            return null;
         }
 
         return [
