@@ -3,6 +3,7 @@
 namespace Label84\MailViewer\Listeners;
 
 use Illuminate\Mail\Events\MessageSent;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Label84\MailViewer\Models\MailViewerItem;
 use Symfony\Component\Mime\Email;
@@ -26,8 +27,8 @@ class CreateMailViewerItem
             'notification' => $event->data['__laravel_notification'] ?? null,
             'recipients' => $this->formatRecipients($message),
             'subject' => $message->getSubject(),
-            'body' => $message->getHtmlBody(),
-            'sent_at' => now(),
+            'body' => config('mailviewer.database.include.body', true) ? $message->getHtmlBody() : null,
+            'sent_at' => Carbon::now()->timezone(config('app.timezone', 'UTC')),
         ]);
     }
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <title>{{ config('mailviewer.view.title', 'MailViewer') }}</title>
 </head>
 
@@ -59,9 +59,13 @@
                             </abbr>
                         </td>
                         <td class="text-gray-700 py-4 px-2">
+                            @if($mail->body)
                             <a href="{{ route('mailviewer.show', $mail) }}" target="{{ config('mailviewer.view.use_tabs') ? '_blank' : '_self' }}" class="underline text-blue-500">
                                 {{ $mail->subject }}
                             </a>
+                            @else
+                            {{ $mail->subject }}
+                            @endif
                         </td>
                         <td class="text-gray-700 py-4 px-2">
                             @foreach($mail->to_recipients as $recipient)

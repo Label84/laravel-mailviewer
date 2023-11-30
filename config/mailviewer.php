@@ -78,6 +78,10 @@ return [
              * Store additional message data to the headers column
              */
             'headers' => true,
+            /**
+             * Store the body of the message in the database
+             */
+            'body' => true,
         ],
 
         'exclude' => [
