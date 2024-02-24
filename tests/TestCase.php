@@ -2,7 +2,9 @@
 
 namespace Label84\MailViewer\Tests;
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Schema;
 use Label84\MailViewer\MailViewerServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
@@ -13,7 +15,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         parent::setUp();
 
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->setUpDatabase();
     }
 
     protected function getPackageProviders($app): array
@@ -25,8 +27,31 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function getEnvironmentSetUp($app): void
     {
-        include_once __DIR__.'/../database/migrations/create_mail_viewer_items_table.php.stub';
+        config()->set('mailviewer.database_connection', 'sqlite');
+        config()->set('database.default', 'sqlite');
+        config()->set('database.connections.sqlite', [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+        ]);
+    }
 
-        (new \CreateMailViewerItemsTable())->up();
+    protected function setUpDatabase()
+    {
+        Schema::create(config('mailviewer.table_name'), function (Blueprint $table) {
+            $table->uuid('uuid')->primary();
+
+            $table->string('event_type');
+            $table->string('mailer');
+
+            $table->text('headers')->nullable();
+            $table->text('recipients');
+
+            $table->string('notification')->nullable();
+
+            $table->string('subject')->nullable();
+            $table->text('body')->nullable();
+
+            $table->string('sent_at');
+        });
     }
 }
