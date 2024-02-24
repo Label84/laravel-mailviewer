@@ -24,8 +24,8 @@ Mailviewer enables you to view and filter mail that is sent by your Laravel appl
 
 | Version | Release |
 |---------|---------|
+| 11.x    | ^3.0    |
 | 10.x    | ^3.0    |
-| 9.x     | ^3.0    |
 
 ## Limitations
 

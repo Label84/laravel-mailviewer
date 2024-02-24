@@ -123,9 +123,9 @@ class ViewTest extends TestCase
         $response->assertSuccessful();
 
         $response->assertViewHas('mails', MailViewerItem::whereBetween('sent_at', [
-                Carbon::createFromFormat('Y-m-d H:i', $aroundTime)->subMinutes(10),
-                Carbon::createFromFormat('Y-m-d H:i', $aroundTime)->addMinutes(10),
-            ])
+            Carbon::createFromFormat('Y-m-d H:i', $aroundTime)->subMinutes(10),
+            Carbon::createFromFormat('Y-m-d H:i', $aroundTime)->addMinutes(10),
+        ])
             ->paginate(50)
             ->appends(['around' => $aroundTime]));
     }
@@ -143,16 +143,16 @@ class ViewTest extends TestCase
         $aroundTime = now()->format('Y-m-d H:i');
 
         $response = $this->withoutMiddleware()->get(route('mailviewer.index', [
-                'around' => $aroundTime,
-                'd' => 5,
-            ]));
+            'around' => $aroundTime,
+            'd' => 5,
+        ]));
 
         $response->assertSuccessful();
 
         $response->assertViewHas('mails', MailViewerItem::whereBetween('sent_at', [
-                Carbon::createFromFormat('Y-m-d H:i', $aroundTime)->subMinutes(5),
-                Carbon::createFromFormat('Y-m-d H:i', $aroundTime)->addMinutes(5),
-            ])
+            Carbon::createFromFormat('Y-m-d H:i', $aroundTime)->subMinutes(5),
+            Carbon::createFromFormat('Y-m-d H:i', $aroundTime)->addMinutes(5),
+        ])
             ->paginate(50)
             ->appends(['around' => $aroundTime, 'd' => 5]));
     }
