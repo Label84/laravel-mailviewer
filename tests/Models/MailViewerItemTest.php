@@ -28,7 +28,7 @@ class MailViewerItemTest extends TestCase
                 'subject',
                 'body',
                 'sent_at',
-        ])
+            ])
         );
     }
 
