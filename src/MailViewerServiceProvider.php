@@ -2,9 +2,10 @@
 
 namespace Label84\MailViewer;
 
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Label84\MailViewer\Providers\EventServiceProvider;
+use Label84\MailViewer\Subscribers\MessageSentSubscriber;
 
 class MailViewerServiceProvider extends ServiceProvider
 {
@@ -38,7 +39,7 @@ class MailViewerServiceProvider extends ServiceProvider
             'mailviewer'
         );
 
-        $this->app->register(EventServiceProvider::class);
+        Event::subscribe(MessageSentSubscriber::class);
     }
 
     protected function registerRoutes(): void
