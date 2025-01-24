@@ -40,7 +40,7 @@ class CreateMailViewerItem
 
         return [
             'date' => $headers->get('date'),
-            'message-id' => $headers->get('message-id')->getIds(),
+            'message-id' => $headers->get('message-id')?->getIds(),
             'from' => $headers->get('from'),
         ];
     }
