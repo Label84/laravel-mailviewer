@@ -40,9 +40,28 @@ class CreateMailViewerItem
 
         return [
             'date' => $headers->get('date'),
-            'message-id' => $headers->get('message-id'),
+            'message-id' => $this->getMessageId($headers),
             'from' => $headers->get('from'),
         ];
+    }
+
+    private function getMessageId(Headers $headers): mixed
+    {
+        $messageId = $headers->get('message-id');
+
+        if ($messageId instanceof \Symfony\Component\Mime\Header\UnstructuredHeader) {
+            return $messageId->getBodyAsString();
+        }
+
+        if ($messageId instanceof \Symfony\Component\Mime\Header\IdentificationHeader) {
+            return $messageId->getIds();
+        }
+
+        if (is_object($messageId)) {
+            return $messageId->toString();
+        }
+
+        return $messageId;
     }
 
     private function formatRecipients(Email $message): array
