@@ -8,7 +8,7 @@ use Label84\MailViewer\Tests\TestCase;
 
 class ViewTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
     }

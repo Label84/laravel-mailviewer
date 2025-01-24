@@ -10,7 +10,7 @@ use Ramsey\Uuid\Lazy\LazyUuidFromString;
 
 class MailViewerItemTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
     }
@@ -18,7 +18,7 @@ class MailViewerItemTest extends TestCase
     public function test_it_has_the_required_columns()
     {
         $this->assertTrue(
-            Schema::hasColumns(with(new MailViewerItem())->getTable(), [
+            Schema::hasColumns(with(new MailViewerItem)->getTable(), [
                 'uuid',
                 'event_type',
                 'mailer',
@@ -41,7 +41,7 @@ class MailViewerItemTest extends TestCase
 
     public function test_it_orders_items_by_date_desc_by_default()
     {
-        $this->assertEquals((new MailViewerItem())->getGlobalScope('order'), function (Builder $builder) {
+        $this->assertEquals((new MailViewerItem)->getGlobalScope('order'), function (Builder $builder) {
             $builder->orderBy('sent_at', 'desc');
         });
     }

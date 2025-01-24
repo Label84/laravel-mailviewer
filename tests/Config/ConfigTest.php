@@ -9,7 +9,7 @@ use Label84\MailViewer\Tests\TestCase;
 
 class ConfigTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
     }
@@ -18,7 +18,7 @@ class ConfigTest extends TestCase
     {
         config()->set('mailviewer.enabled', false);
 
-        Notification::route('mail', 'info@example.com')->notify(new TestNotification());
+        Notification::route('mail', 'info@example.com')->notify(new TestNotification);
 
         $this->assertCount(0, MailViewerItem::all());
     }
@@ -29,7 +29,7 @@ class ConfigTest extends TestCase
             TestNotification::class,
         ]);
 
-        Notification::route('mail', 'info@example.com')->notify(new TestNotification());
+        Notification::route('mail', 'info@example.com')->notify(new TestNotification);
 
         $this->assertCount(0, MailViewerItem::all());
     }
@@ -40,7 +40,7 @@ class ConfigTest extends TestCase
             'info@example.com',
         ]);
 
-        Notification::route('mail', 'info@example.com')->notify(new TestNotification());
+        Notification::route('mail', 'info@example.com')->notify(new TestNotification);
 
         $this->assertCount(0, MailViewerItem::all());
     }

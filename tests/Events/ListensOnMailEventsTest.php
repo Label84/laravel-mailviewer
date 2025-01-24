@@ -9,14 +9,14 @@ use Label84\MailViewer\Tests\TestCase;
 
 class ListensOnMailEventsTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
     }
 
     public function test_it_triggers_the_listener_on_message_sent_event()
     {
-        Notification::route('mail', 'info@example.com')->notify(new TestNotification());
+        Notification::route('mail', 'info@example.com')->notify(new TestNotification);
 
         $this->assertCount(1, MailViewerItem::all());
     }
