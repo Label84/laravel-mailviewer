@@ -37,7 +37,7 @@ class CreateMailViewerItem
         if (! config('mailviewer.database.include.headers')) {
             return null;
         }
-        
+
         return [
             'date' => $headers->get('date'),
             'message-id' => $this->getMessageId($headers),
@@ -49,12 +49,16 @@ class CreateMailViewerItem
     {
         $messageId = $headers->get('message-id');
 
+        if ($messageId instanceof \Symfony\Component\Mime\Header\UnstructuredHeader) {
+            return $messageId->getBodyAsString();
+        }
+
+        if ($messageId instanceof \Symfony\Component\Mime\Header\IdentificationHeader) {
+            return $messageId->getIds();
+        }
+
         if (is_object($messageId)) {
-            return match (get_class($messageId)) {
-                \Symfony\Component\Mime\Header\UnstructuredHeader::class => $messageId->getBodyAsString(),
-                \Symfony\Component\Mime\Header\IdentificationHeader::class => $messageId->getIds(),
-                default => $messageId->toString()
-            };
+            return $messageId->toString();
         }
 
         return $messageId;
