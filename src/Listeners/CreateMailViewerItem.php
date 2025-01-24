@@ -44,18 +44,19 @@ class CreateMailViewerItem
             'from' => $headers->get('from'),
         ];
     }
-    
+
     private function getMessageId(Headers $headers): mixed
     {
         $messageId = $headers->get('message-id');
-        
+
         if (is_object($messageId)) {
             return match (get_class($messageId)) {
                 \Symfony\Component\Mime\Header\UnstructuredHeader::class => $messageId->getBodyAsString(),
-                \Symfony\Component\Mime\Header\IdentificationHeader::class => $messageId->getIds()
+                \Symfony\Component\Mime\Header\IdentificationHeader::class => $messageId->getIds(),
+                default => $messageId->toString()
             };
         }
-        
+
         return $messageId;
     }
 
