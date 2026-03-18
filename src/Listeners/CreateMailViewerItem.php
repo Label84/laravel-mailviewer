@@ -8,6 +8,8 @@ use Illuminate\Support\Collection;
 use Label84\MailViewer\Models\MailViewerItem;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Header\Headers;
+use Symfony\Component\Mime\Header\IdentificationHeader;
+use Symfony\Component\Mime\Header\UnstructuredHeader;
 
 class CreateMailViewerItem
 {
@@ -17,7 +19,7 @@ class CreateMailViewerItem
             return;
         }
 
-        /** @var \Symfony\Component\Mime\Email $message */
+        /** @var Email $message */
         $message = $event->message;
 
         MailViewerItem::create([
@@ -49,11 +51,11 @@ class CreateMailViewerItem
     {
         $messageId = $headers->get('message-id');
 
-        if ($messageId instanceof \Symfony\Component\Mime\Header\UnstructuredHeader) {
+        if ($messageId instanceof UnstructuredHeader) {
             return $messageId->getBodyAsString();
         }
 
-        if ($messageId instanceof \Symfony\Component\Mime\Header\IdentificationHeader) {
+        if ($messageId instanceof IdentificationHeader) {
             return $messageId->getIds();
         }
 

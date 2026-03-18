@@ -2,7 +2,6 @@
 
 namespace Label84\MailViewer\Tests\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Schema;
 use Label84\MailViewer\Models\MailViewerItem;
 use Label84\MailViewer\Tests\TestCase;
@@ -41,8 +40,11 @@ class MailViewerItemTest extends TestCase
 
     public function test_it_orders_items_by_date_desc_by_default()
     {
-        $this->assertEquals((new MailViewerItem)->getGlobalScope('order'), function (Builder $builder) {
-            $builder->orderBy('sent_at', 'desc');
-        });
+        $older = MailViewerItem::factory()->create(['sent_at' => now()->subDay()]);
+        $newer = MailViewerItem::factory()->create(['sent_at' => now()]);
+
+        $items = MailViewerItem::all();
+
+        $this->assertEquals([$newer->id, $older->id], $items->pluck('id')->all());
     }
 }

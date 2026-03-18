@@ -3,6 +3,7 @@
 namespace Label84\MailViewer\Tests\Views;
 
 use Carbon\Carbon;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Label84\MailViewer\Models\MailViewerItem;
 use Label84\MailViewer\Tests\TestCase;
 
@@ -53,7 +54,7 @@ class ViewTest extends TestCase
 
     public function test_it_can_list_the_mail_viewer_items_with_notification_base_class_query_filter()
     {
-        $class = class_basename(\Illuminate\Auth\Notifications\VerifyEmail::class);
+        $class = class_basename(VerifyEmail::class);
 
         $response = $this->withoutMiddleware()->get(route('mailviewer.index', ['notification' => $class]));
 
