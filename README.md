@@ -23,7 +23,8 @@ Mailviewer enables you to view and filter mail that is sent by your Laravel appl
 
 | Version | Release |
 |---------|---------|
-| 12.x    | ^3.0    |
+| 12.x    | ^3.4    |
+| 12.x    | ^3.4    |
 | 11.x    | ^3.0    |
 
 ## Limitations
@@ -114,6 +115,7 @@ In the config file you can add an array of Notification classes and an array of 
 ## Tests
 
 ```sh
+composer pint
 composer analyse
 composer test
 ```
